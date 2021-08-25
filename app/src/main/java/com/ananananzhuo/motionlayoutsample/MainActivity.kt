@@ -19,6 +19,11 @@ class MainActivity : CustomAdapterActivity() {
                 toAnimPage(R.layout.anim_0)
             }
         }),
+        ItemData(title = "实现底部向上滑动title，变旋转标题",callback = object :Callback{
+            override fun callback(callData: CallData) {
+                toAnimPage(R.layout.anim_1)
+            }
+        }),
     )
 
     private fun toAnimPage(layoutId: Int) {
