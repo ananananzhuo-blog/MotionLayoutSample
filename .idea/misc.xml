@@ -13,6 +13,8 @@
         <entry key="app/src/main/res/layout/activity_simple_anim_start.xml" value="0.15070921985815602" />
         <entry key="app/src/main/res/layout/anim_0.xml" value="0.20742753623188406" />
         <entry key="app/src/main/res/layout/anim_1.xml" value="0.1875" />
+        <entry key="app/src/main/res/layout/anim_2.xml" value="0.20742753623188406" />
+        <entry key="app/src/main/res/layout/anim_topbar.xml" value="0.20742753623188406" />
       </map>
     </option>
   </component>

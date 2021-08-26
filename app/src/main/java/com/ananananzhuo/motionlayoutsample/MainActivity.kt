@@ -1,6 +1,7 @@
 package com.ananananzhuo.motionlayoutsample
 
 import android.content.Intent
+import androidx.coordinatorlayout.widget.CoordinatorLayout
 import com.ananananzhuo.mvvm.activity.CustomAdapterActivity
 import com.ananananzhuo.mvvm.bean.bean.ItemData
 import com.ananananzhuo.mvvm.callback.CallData
@@ -22,6 +23,11 @@ class MainActivity : CustomAdapterActivity() {
         ItemData(title = "实现底部向上滑动title，变旋转标题",callback = object :Callback{
             override fun callback(callData: CallData) {
                 toAnimPage(R.layout.anim_1)
+            }
+        }),
+        ItemData(title = "滑动NestScrollView，topbar向上滑动",callback = object :Callback{
+            override fun callback(callData: CallData) {
+                toAnimPage(R.layout.anim_2)
             }
         }),
     )
