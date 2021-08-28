@@ -7,6 +7,7 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="app/src/main/res/layout/activity_nest_scroll.xml" value="0.1780821917808219" />
         <entry key="app/src/main/res/layout/activity_show_anim.xml" value="0.20742753623188406" />
         <entry key="app/src/main/res/layout/activity_simple_anim.xml" value="0.165" />
         <entry key="app/src/main/res/layout/activity_simple_anim_end.xml" value="0.11203703703703703" />
@@ -16,12 +17,14 @@
         <entry key="app/src/main/res/layout/anim_2.xml" value="0.20742753623188406" />
         <entry key="app/src/main/res/layout/anim_3.xml" value="0.20742753623188406" />
         <entry key="app/src/main/res/layout/anim_field0.xml" value="0.20742753623188406" />
+        <entry key="app/src/main/res/layout/anim_field1.xml" value="0.1" />
         <entry key="app/src/main/res/layout/anim_topbar.xml" value="0.20742753623188406" />
+        <entry key="app/src/main/res/layout/motion_header.xml" value="0.1" />
         <entry key="app/src/main/res/xml/test_scence.xml" value="0.20742753623188406" />
       </map>
     </option>
   </component>
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_1_8" default="true" project-jdk-name="1.8" project-jdk-type="JavaSDK">
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" project-jdk-name="1.8" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/build/classes" />
   </component>
   <component name="ProjectType">

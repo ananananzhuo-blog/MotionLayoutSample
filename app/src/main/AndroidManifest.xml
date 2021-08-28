@@ -10,6 +10,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MotionLayoutSample">
         <activity
+            android:name=".NestScrollActivity"
+            android:exported="true" />
+        <activity
             android:name=".ShowAnimActivity"
             android:exported="true" />
         <activity

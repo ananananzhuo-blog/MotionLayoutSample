@@ -3,17 +3,14 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    app:layoutDescription="@xml/anim_field0_scene">
+    app:showPaths="true"
+    app:layoutDescription="@xml/anim_field1_scene">
 
 
     <ImageView
         android:id="@+id/iv"
         android:layout_width="50dp"
         android:layout_height="50dp"
-        android:layout_marginLeft="10dp"
-        android:src="@drawable/apple"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:src="@drawable/apple" />
 
 </androidx.constraintlayout.motion.widget.MotionLayout>
