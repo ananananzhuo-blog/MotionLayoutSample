@@ -25,9 +25,14 @@ class MainActivity : CustomAdapterActivity() {
                 toAnimPage(R.layout.anim_1)
             }
         }),
-        ItemData(title = "滑动NestScrollView，topbar向上滑动",callback = object :Callback{
+        ItemData(title = "（本例暂时未完成）滑动NestScrollView，topbar向上滑动",callback = object :Callback{
             override fun callback(callData: CallData) {
                 toAnimPage(R.layout.anim_2)
+            }
+        }),
+        ItemData(title = "实现keyframe动画",callback = object :Callback{
+            override fun callback(callData: CallData) {
+                toAnimPage(R.layout.anim_3)
             }
         }),
     )
