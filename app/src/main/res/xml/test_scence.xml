@@ -11,12 +11,14 @@
             app:dragDirection="dragRight"
             app:touchAnchorId="@id/iv_0"
             app:touchAnchorSide="right" />
+
     </Transition>
     <ConstraintSet
         android:id="@+id/start">
         <Constraint
             android:id="@+id/iv_0"
             android:layout_width="10dp"
+
             android:layout_height="10dp"/>
 
     </ConstraintSet>
@@ -29,3 +31,39 @@
     </ConstraintSet>
 
 </MotionScene>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

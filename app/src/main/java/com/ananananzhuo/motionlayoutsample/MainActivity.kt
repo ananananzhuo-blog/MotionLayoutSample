@@ -35,6 +35,11 @@ class MainActivity : CustomAdapterActivity() {
                 toAnimPage(R.layout.anim_3)
             }
         }),
+        ItemData(title = "OnSwip.dragThreshold",callback = object :Callback{
+            override fun callback(callData: CallData) {
+                toAnimPage(R.layout.anim_field0)
+            }
+        }),
     )
 
     private fun toAnimPage(layoutId: Int) {
