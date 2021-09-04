@@ -1,32 +1,35 @@
 关注公众号学习更多知识
 
-![](https://files.mdnice.com/user/15648/404c2ab2-9a89-40cf-ba1c-02df017a4ae8.jpg)
+## 简单实现效果
+模拟器录制的，比较卡顿，建议耐心看完
 
+
+![](https://files.mdnice.com/user/15648/dc9a6718-0fd1-459a-bab4-8875f482f06f.gif)
 
 
 ## 使用概述
-`MotionLayout`是一个布局，是`ConstraintLayout`的子布局。专门用来实现运动过程中的控件动画，
+`MotionLayout`是一个布局，`ConstraintLayout`的子布局。专门用来实现运动过程中的控件动画，
 
 `举例：`我们可以通过在布局文件`layoutA`中`MotionLayout`进行布局，在布局中设置两个子控件`TextView`和`ImageView`。比如我们想在布局中手指触碰向上滑动的时候让`ImageView`向上滑动，那么我们需要在xml文件夹下创建一个xml布局文件`scenceA`，在`scenceA`中处理滑动。我们会在`scenceA xml`文件中创建 两个`ConstraintSet/Constraint`节点，一个节点是动画开始节点表示动画开始前布局的状态`start`，另一个节点表示动画结束后布局的状态`end`。当动画完成的时候`ImageView`会从`start`状态转换为`end`状态。
 
 
-`以下以结束状态进行举例：`
+`以结束状态进行举例：`
 ```kotlin
 <ConstraintSet android:id="@+id/end">
-<Constraint
-android:id="@id/iv_0"
-android:layout_width="100dp"
-android:layout_height="100dp"
-app:layout_constraintBottom_toBottomOf="parent"
-app:layout_constraintRight_toRightOf="parent"
-android:rotation="720"
-app:layout_constraintTop_toTopOf="parent" >
-<CustomAttribute
-app:customDimension="100dp"
-app:attributeName="end"
-/>
-</Constraint>
-</ConstraintSet>
+        <Constraint
+            android:id="@id/iv_0"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            android:rotation="720"
+            app:layout_constraintTop_toTopOf="parent" >
+            <CustomAttribute
+                app:customDimension="100dp"
+                app:attributeName="end"
+                />
+        </Constraint>
+    </ConstraintSet>
 ```
 
 
@@ -70,7 +73,7 @@ app:attributeName="end"
 ### Constraint
 每一个Constraint可以为一个控件设置动画效果，例如如下代码：
 
-我们会为我们布局中空间id为`iv_0`的控件设置宽高和布局约束属性。
+我们会为我们布局中控件id为`iv_0`的控件设置宽高和布局约束属性。
 ##### Constraint属性
 `Constraint`的属性完全等同于ConstraintLayout的属性，
 `Constraint`的属性完全等同于ConstraintLayout的属性，
@@ -88,7 +91,8 @@ app:attributeName="end"
 
 **Constraint属性**
 
-`Constraint`的属性完全等同于ConstraintLayout的属性，##### Constraint属性
+`Constraint`的属性完全等同于ConstraintLayout的属性，
+##### Constraint属性
 `Constraint`的属性完全等同于ConstraintLayout的属性，
 
 ### Transition、onClick、onSwipe
@@ -102,7 +106,7 @@ Transition可以搭配多个onClick和onSwpie进行使用
 #### Transition、onSwipe
 OnSwipe用于控制滑动中的动画，例如如下代码中，
 
-`dragDirection`表示控件拖动的方法是向右拖动
+`dragDirection`表示控件拖动的方法
 
 `touchAnchorId：`表示所触碰的控件id是iv_0
 
@@ -231,6 +235,7 @@ scence代码：
 ### OnSwipe.touchRegionId
 可以通过touchRegionId设置触碰被触碰的控件，比如本例中，我们设置`app:touchRegionId="@id/iv"`那么只有在我们手指触碰再ImaveView时才会有动画效果，否则如果不设置`touchRegionId`我们触碰全局都可以实现滑动效果。
 
+`touchRegionId`有个缺点，当我们给某个`MotionLayout`设置`touchRegionId`时，它内部的所有子view都无法执行点击事件（**down事件直接就在onInterceptTouchEvent中被拦截了，没有可处理的空间**）。这个情况可以通过自定义`MotionLayout`解决，我目前并没有尝试过，项目中使用的时候再去处理。
 
 示例：
 ```xml
@@ -249,6 +254,7 @@ scence代码：
 [布局文件](https://gitee.com/ymeddmn/MotionLayoutSample/blob/main/app/src/main/res/layout/anim_field0.xml)
 
 [scence文件](https://gitee.com/ymeddmn/MotionLayoutSample/blob/main/app/src/main/res/xml/anim_field0_scene.xml)
+
 
 ### OnSwipe.touchAnchorSide
 滑动所固定到的目标视图的一侧。MotionLayout 将尝试在该固定点与用户手指之间保持恒定的距离。可接受的值包括 "left"、"right"、"top" 和 "bottom"。
@@ -291,3 +297,270 @@ X 轴是目标视图在路径范围内移动的方向，其中 0 为起始位置
 
 例如，假设您希望视图按如下方式移动：在运动序列前半部分的移动距离占总距离的 10％，然后加速移动以覆盖剩余 90％ 的距离。为此，请将 `framePosition` 设置为 50，将 `keyPositionType` 设置为 `pathRelative`，并将 `percentX` 设置为 0.1。
 
+## 使用MotionLayout实现嵌套滑动的效果
+### 示例代码
+[代码示例](https://github.com/ananananzhuo-blog/MotionLayoutSample/blob/main/app/src/main/java/com/ananananzhuo/motionlayoutsample/NestScrollActivity.kt)
+
+### 设计图
+
+本例要实现的效果如下：
+
+![](https://files.mdnice.com/user/15648/dee83489-4b49-46d4-8c50-0a8d6791b17b.png)
+
+
+### 实现思路
+`View`的结构如上图，实现这个效果需要两个`View`，绿色的`View`是一个`MotionLayout` `viewA`，红色的`View`是一个`NestScrollView` `viewB`，`viewA和viewB`同时存在于同一个`MotionLayout` viewP中。
+
+实现滑动的效果我们需要两个`scence`，第一个`scence`  `activity_nest_scroll_scene` 挂载在`viewP`中，用来处理我们滑动中`viewB`时`viewA`向上缩放，`viewB`向上滑动的实现。
+
+
+我们的实现效果中还需要在向上滑动的时候将绿色部分的文字由垂直方向排列转换为水平排列。这需要我们同时再给`viewA`节点中的`MotionLayout`添加一个`scence`，这个`scence`用于处理文字的展示变化
+### 实现代码的关键点
+
+1. 如果想让`header`内部嵌套的`scence`跟随外部的`scence`联动，则需要设置
+
+`app:motionProgress="1"`
+
+`motionProgress`这个属性是关键，
+
+我们需要在外部`scence`的动画结束状态中将`header`的`motion`动画进度设置为1，这样在外部`scence`动画进行的过程中，内部`scence`会保持相同的动画进度
+
+示例中的代码如图：
+
+![](https://files.mdnice.com/user/15648/6f195425-7fc2-4aa5-b947-51d2a43e6381.png)
+
+### 实现效果
+![滑动效果](https://p9-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/859aab2797d64963a22a7ab35b8a9596~tplv-k3u1fbpfcp-watermark.image)
+
+### 实现代码(可跳过)
+
+1. 最外层布局viewP的代码
+
+`app:layoutDescription="@xml/activity_nest_scroll_scene"`用来给设置header和NestScrollView之间的动画
+
+
+`文件名：activity_nest_scroll.xml`
+```xml
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.motion.widget.MotionLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".NestScrollActivity"
+    app:layoutDescription="@xml/activity_nest_scroll_scene">
+
+    <include layout="@layout/motion_header"/>
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/scrollable"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+      >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/large_text" />
+
+    </androidx.core.widget.NestedScrollView>
+
+</androidx.constraintlayout.motion.widget.MotionLayout>
+```
+2. viewP的scence代码（activity_nest_scroll_scene）
+   `文件名：activity_nest_scroll_scene.xml`
+```xml
+<?xml version="1.0" encoding="utf-8"?>
+<MotionScene xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:motion="http://schemas.android.com/apk/res-auto"
+    >
+
+
+
+    <Transition
+        motion:constraintSetEnd="@+id/end"
+        motion:constraintSetStart="@+id/start"
+        motion:duration="250"
+        motion:motionInterpolator="linear">
+
+        <OnSwipe
+            motion:dragDirection="dragUp"
+            motion:touchAnchorId="@+id/motionLayout"
+            motion:touchAnchorSide="bottom" />
+    </Transition>
+
+
+    <ConstraintSet android:id="@+id/start">
+        <Constraint
+            android:id="@+id/motionLayout"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            app:layout_constraintTop_toTopOf="parent" />
+        <Constraint
+            android:id="@+id/scrollable"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/motionLayout" />
+
+    </ConstraintSet>
+
+    <ConstraintSet android:id="@+id/end">
+        <Constraint
+            android:id="@+id/motionLayout"
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            app:motionProgress="1"
+            app:layout_constraintTop_toTopOf="parent" />
+        <Constraint
+            android:id="@+id/scrollable"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/motionLayout" />
+    </ConstraintSet>
+
+</MotionScene>
+
+```
+
+3. viewA的代码
+   这部分代码在第一部分中使用include标签添加到布局中
+
+`文件名：motion_header.xml`
+```xml
+
+<androidx.constraintlayout.motion.widget.MotionLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/motionLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#1e376b"
+    app:layoutDescription="@xml/scene_17_header"
+    app:showPaths="true">
+
+    <TextView
+        android:id="@+id/background"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:background="#0a3"
+        android:scaleType="centerCrop"
+        />
+
+    <TextView
+        android:id="@+id/label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="安安安安卓"
+        android:textColor="#FFF"
+        android:textSize="32dp"
+        android:transformPivotX="0dp"
+        android:transformPivotY="0dp" />
+
+
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_begin="200dp" />
+
+</androidx.constraintlayout.motion.widget.MotionLayout>
+```
+4. viewA的scence代码
+   `文件名：scene_17_header.xml`
+```xml
+<?xml version="1.0" encoding="utf-8"?><!--
+  Copyright (C) 2018 The Android Open Source Project
+  Licensed under the Apache License, Version 2.0 (the "License");
+  you may not use this file except in compliance with the License.
+  You may obtain a copy of the License at
+
+       http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+  -->
+<MotionScene xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:motion="http://schemas.android.com/apk/res-auto">
+
+    <Transition
+        motion:constraintSetEnd="@+id/end"
+        motion:constraintSetStart="@+id/start"
+        motion:duration="1000"
+        motion:motionInterpolator="linear">
+        <OnSwipe
+            motion:dragDirection="dragUp"
+            motion:touchAnchorId="@+id/background"
+            motion:touchAnchorSide="bottom" />
+    </Transition>
+
+    <ConstraintSet android:id="@+id/start">
+        <Constraint
+            android:id="@id/background"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:alpha="1.0"
+            android:scaleX="1.1"
+            android:scaleY="1.1"
+            motion:layout_constraintTop_toTopOf="parent" />
+        <Constraint
+            android:id="@id/label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:alpha="0.6"
+            android:rotation="-90.0"
+            android:translationY="8dp"
+            motion:layout_constraintBottom_toBottomOf="@+id/guideline"
+            motion:layout_constraintStart_toStartOf="parent" />
+
+        <Constraint
+            android:id="@id/guideline"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            motion:layout_constraintGuide_begin="200dp" />
+    </ConstraintSet>
+
+    <ConstraintSet android:id="@+id/end">
+        <Constraint
+            android:id="@id/background"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:alpha="0"
+            android:translationX="0dp"
+            android:translationY="0dp"
+            motion:layout_constraintTop_toTopOf="parent" />
+        <Constraint
+            android:id="@id/label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginBottom="8dp"
+            android:rotation="0.0"
+            motion:layout_constraintBottom_toBottomOf="@+id/guideline"
+            motion:layout_constraintStart_toStartOf="parent" />
+
+        <Constraint
+            android:id="@id/guideline"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            motion:layout_constraintGuide_begin="56dp" />
+    </ConstraintSet>
+</MotionScene>
+```
+
+  
+  
+  
+  
+  
+  
+  
+  
+  

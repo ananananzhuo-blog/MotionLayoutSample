@@ -33,20 +33,13 @@
         android:id="@+id/label"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Monterey"
+        android:text="安安安安卓"
         android:textColor="#FFF"
         android:textSize="32dp"
         android:transformPivotX="0dp"
         android:transformPivotY="0dp" />
 
-    <TextView
-        android:id="@+id/sublabel"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="California"
-        android:textColor="#FFF"
-        android:textSize="24sp"
-        app:fontFamily="cursive" />
+
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline"
